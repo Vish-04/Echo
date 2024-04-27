@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
+import AWS from 'aws-sdk';
 
-const Recorder = () => {
+const Recorder = ({handleSrc}) => {
     const [canRecord, setCanRecord] = useState(false)
     const [isRecording, setIsRecording] = useState(false)
     const [src, setSrc] = useState("")
-    const [keydown, setKeydown] = useState(false)
-
     const [recorder, setRecorder] = useState(null)
 
     let chunks = []
@@ -68,6 +67,7 @@ const Recorder = () => {
                 chunks = []
                 const audioURL = window.URL.createObjectURL(blob)
                 setSrc(audioURL);
+                handleSrc(audioURL)
             }
         }
     }, [recorder])
@@ -82,7 +82,6 @@ const Recorder = () => {
             recorder.stop()
         }
     }
-
 
     return (
         <div

@@ -15,4 +15,51 @@ module.exports = {
     },
   },
   plugins: [],
+
+  theme: {
+    extend: {
+      keyframes: {
+        pulseExpand: {
+          '0%, 100%': { 
+            transform: 'scale(1)', 
+            opacity: '1' 
+          },
+          '50%': { 
+            transform: 'scale(1.05)', 
+            opacity: '.5' 
+          },
+        },
+      },
+      animation: {
+        'pulse-expand': 'pulseExpand 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+    },
+  },
+
+  theme: {
+    extend: {
+      keyframes: {
+        pulseExpandOutwards: {
+          '0%, 100%': { 
+            transform: 'scale(1)', 
+            opacity: '1' 
+          },
+          '50%': { 
+            transform: 'scale(1.1)', // Increase scale more than 1 to expand outwards
+            opacity: '.5' 
+          },
+        },
+      },
+      animation: {
+        'pulse-expand-outwards': 'pulseExpandOutwards 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+    },
+  },
+  theme: {
+    extend: {
+      fontFamily: {
+        livvic: ['Livvic'],
+      },
+    },
+  },
 };

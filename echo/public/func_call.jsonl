@@ -1,0 +1,159 @@
+{"input": "Navigate to the theater", "output": "changeNav:0"}
+{"input": "Create a new post", "output": "changeCreatePost:true"}
+{"input": "Show me the chamber", "output": "changeNav:1"}
+{"input": "Echo this message", "output": "echo:none"}
+{"input": "Cancel post creation", "output": "changeCreatePost:false"}
+{"input": "Read user's name", "output": "readName:none"}
+{"input": "I want to echo", "output": "echo:none"}
+{"input": "Take me to the theater", "output": "changeNav:0"}
+{"input": "Show me the feed", "output": "changeNav:0"}
+{"input": "Navigate to the chamber", "output": "changeNav:1"}
+{"input": "I want to reverb", "output": "reverb:none"}
+{"input": "Read the bio", "output": "readBio:none"}
+{"input": "Go to the chamber", "output": "changeNav:1"}
+{"input": "Create post", "output": "changeCreatePost:true"}
+{"input": "I want to echo this", "output": "echo:none"}
+{"input": "Take me to the feed", "output": "changeNav:0"}
+{"input": "Make a new post", "output": "changeCreatePost:true"}
+{"input": "Cancel creating post", "output": "changeCreatePost:false"}
+{"input": "Read the name", "output": "readName:none"}
+{"input": "Echo the message", "output": "echo:none"}
+{"input": "Navigate to theater", "output": "changeNav:0"}
+{"input": "Show feed", "output": "changeNav:0"}
+{"input": "Navigate to chamber", "output": "changeNav:1"}
+{"input": "I want to comment", "output": "noFunction:none"}
+{"input": "Read bio", "output": "readBio:none"}
+{"input": "Go to theater", "output": "changeNav:0"}
+{"input": "Create a post", "output": "changeCreatePost:true"}
+{"input": "Cancel post", "output": "changeCreatePost:false"}
+{"input": "Get user's name", "output": "readName:none"}
+{"input": "Echo this", "output": "echo:none"}
+{"input": "Theater", "output": "changeNav:0"}
+{"input": "Chamber", "output": "changeNav:1"}
+{"input": "I want to reverb on this", "output": "reverb:none"}
+{"input": "I want to echo that", "output": "echo:none"}
+{"input": "Take me to chamber", "output": "changeNav:1"}
+{"input": "Make new post", "output": "changeCreatePost:true"}
+{"input": "Stop post creation", "output": "changeCreatePost:false"}
+{"input": "Read name", "output": "readName:none"}
+{"input": "Echo it", "output": "echo:none"}
+{"input": "Theater please", "output": "changeNav:0"}
+{"input": "Create post now", "output": "changeCreatePost:true"}
+{"input": "Cancel the post", "output": "changeCreatePost:false"}
+{"input": "User's name", "output": "readName:none"}
+{"input": "Echo that", "output": "echo:none"}
+{"input": "Go to the chamber", "output": "changeNav:1"}
+{"input": "Create a post here", "output": "changeCreatePost:true"}
+{"input": "Cancel this post", "output": "changeCreatePost:false"}
+{"input": "Read the user's name", "output": "readName:none"}
+{"input": "Echo the content", "output": "echo:none"}
+{"input": "Navigate to the theater please", "output": "changeNav:0"}
+{"input": "Create a new post now", "output": "changeCreatePost:true"}
+{"input": "Cancel post creation now", "output": "changeCreatePost:false"}
+{"input": "Read their name", "output": "readName:none"}
+{"input": "Echo this post", "output": "echo:none"}
+{"input": "Show me posts", "output": "changeNav:0"}
+{"input": "Navigate to chamber please", "output": "changeNav:1"}
+{"input": "I want to echo this post", "output": "echo:none"}
+{"input": "Take me to the theater now", "output": "changeNav:0"}
+{"input": "Create new post now", "output": "changeCreatePost:true"}
+{"input": "Stop creating post now", "output": "changeCreatePost:false"}
+{"input": "Give me the name", "output": "readName:none"}
+{"input": "Echo the message now", "output": "echo:none"}
+{"input": "Navigate to theater now", "output": "changeNav:0"}
+{"input": "Create post right now", "output": "changeCreatePost:true"}
+{"input": "Cancel creating post right now", "output": "changeCreatePost:false"}
+{"input": "User name please", "output": "readName:none"}
+{"input": "Echo it now", "output": "echo:none"}
+{"input": "Theater now", "output": "changeNav:0"}
+{"input": "Chamber now", "output": "changeNav:1"}
+{"input": "I want to reverb on this post", "output": "reverb:none"}
+{"input": "I want to echo that post", "output": "echo:none"}
+{"input": "Take me to chamber now", "output": "changeNav:1"}
+{"input": "Make new post now", "output": "changeCreatePost:true"}
+{"input": "Stop post creation now", "output": "changeCreatePost:false"}
+{"input": "Read name now", "output": "readName:none"}
+{"input": "Echo that now", "output": "echo:none"}
+{"input": "Go to the chamber now", "output": "changeNav:1"}
+{"input": "Create a post here now", "output": "changeCreatePost:true"}
+{"input": "Cancel this post now", "output": "changeCreatePost:false"}
+{"input": "Read the user's name now", "output": "readName:none"}
+{"input": "Echo the content now", "output": "echo:none"}
+{"input": "Navigate to the theater immediately", "output": "changeNav:0"}
+{"input": "Create a post asap", "output": "changeCreatePost:true"}
+{"input": "Chamber, now!", "output": "changeNav:1"}
+{"input": "Echo this instantly", "output": "echo:none"}
+{"input": "Cancel post creation now", "output": "changeCreatePost:false"}
+{"input": "Get user's name now", "output": "readName:none"}
+{"input": "Echo it right away", "output": "echo:none"}
+{"input": "Theater now!", "output": "changeNav:0"}
+{"input": "Create post immediately", "output": "changeCreatePost:true"}
+{"input": "Stop creating post immediately", "output": "changeCreatePost:false"}
+{"input": "User name please, now", "output": "readName:none"}
+{"input": "Echo it now, hurry up!", "output": "echo:none"}
+{"input": "Theater, now!", "output": "changeNav:0"}
+{"input": "Chamber, now please!", "output": "changeNav:1"}
+{"input": "I want to reverb on this post immediately", "output": "reverb:none"}
+{"input": "I want to echo that post quickly", "output": "echo:none"}
+{"input": "Take me to chamber now, please", "output": "changeNav:1"}
+{"input": "Make new post now, quickly", "output": "changeCreatePost:true"}
+{"input": "Stop post creation now, hurry", "output": "changeCreatePost:false"}
+{"input": "Read name now, please", "output": "readName:none"}
+{"input": "Echo that now, please", "output": "echo:none"}
+{"input": "Go to the chamber now, please", "output": "changeNav:1"}
+{"input": "Create a post here now, please", "output": "changeCreatePost:true"}
+{"input": "Cancel this post now, hurry", "output": "changeCreatePost:false"}
+{"input": "Read the user's name now, please", "output": "readName:none"}
+{"input": "Echo the content now, please", "output": "echo:none"}
+{"input": "Navigate to the theater instantly", "output": "changeNav:0"}
+{"input": "Create a post immediately", "output": "changeCreatePost:true"}
+{"input": "Take me to the chamber, asap", "output": "changeNav:1"}
+{"input": "Echo this right now", "output": "echo:none"}
+{"input": "Cancel post creation immediately", "output": "changeCreatePost:false"}
+{"input": "Get user's name immediately", "output": "readName:none"}
+{"input": "Echo it ASAP", "output": "echo:none"}
+{"input": "Theater immediately", "output": "changeNav:0"}
+{"input": "Create post ASAP", "output": "changeCreatePost:true"}
+{"input": "Stop creating post ASAP", "output": "changeCreatePost:false"}
+{"input": "User name please, ASAP", "output": "readName:none"}
+{"input": "Echo it ASAP", "output": "echo:none"}
+{"input": "Theater ASAP", "output": "changeNav:0"}
+{"input": "Chamber, now ASAP!", "output": "changeNav:1"}
+{"input": "I want to reverb on this post immediately", "output": "reverb:none"}
+{"input": "I want to echo that post quickly", "output": "echo:none"}
+{"input": "Take me to chamber now, ASAP", "output": "changeNav:1"}
+{"input": "Make new post now, quickly", "output": "changeCreatePost:true"}
+{"input": "Stop post creation now, ASAP", "output": "changeCreatePost:false"}
+{"input": "Read name now, ASAP", "output": "readName:none"}
+{"input": "Echo that now, ASAP", "output": "echo:none"}
+{"input": "Go to the chamber now, ASAP", "output": "changeNav:1"}
+{"input": "Create a post here now, ASAP", "output": "changeCreatePost:true"}
+{"input": "Cancel this post now, ASAP", "output": "changeCreatePost:false"}
+{"input": "Read the user's name now, ASAP", "output": "readName:none"}
+{"input": "Echo the content now, ASAP", "output": "echo:none"}
+{"input": "Navigate to the theater right now", "output": "changeNav:0"}
+{"input": "Create a post right now", "output": "changeCreatePost:true"}
+{"input": "Take me to the chamber, right now", "output": "changeNav:1"}
+{"input": "Echo this immediately", "output": "echo:none"}
+{"input": "Cancel post creation right now", "output": "changeCreatePost:false"}
+{"input": "Get user's name immediately", "output": "readName:none"}
+{"input": "Echo it immediately", "output": "echo:none"}
+{"input": "Theater right now", "output": "changeNav:0"}
+{"input": "Create post right now", "output": "changeCreatePost:true"}
+{"input": "Stop creating post right now", "output": "changeCreatePost:false"}
+{"input": "User name please, right now", "output": "readName:none"}
+{"input": "Echo it right now", "output": "echo:none"}
+{"input": "Theater right now", "output": "changeNav:0"}
+{"input": "Chamber, right now!", "output": "changeNav:1"}
+{"input": "I want to reverb on this post right now", "output": "reverb:none"}
+{"input": "I want to echo that post right now", "output": "echo:none"}
+{"input": "Take me to chamber right now", "output": "changeNav:1"}
+{"input": "Make new post right now", "output": "changeCreatePost:true"}
+{"input": "Stop post creation right now", "output": "changeCreatePost:false"}
+{"input": "Read name right now", "output": "readName:none"}
+{"input": "Echo that right now", "output": "echo:none"}
+{"input": "Go to the chamber right now", "output": "changeNav:1"}
+{"input": "Create a post here right now", "output": "changeCreatePost:true"}
+{"input": "Cancel this post right now", "output": "changeCreatePost:false"}
+{"input": "Read the user's name right now", "output": "readName:none"}
+{"input": "Echo the content right now", "output": "echo:none"}

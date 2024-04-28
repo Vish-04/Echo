@@ -13,44 +13,80 @@ export default function Home() {
   const [nav, setNav] = useState(0)
   const [createPost,setCreatePost] = useState(false)
 
-  const changeNav = (num) =>{
-    setNav(num)
+  function simulateKeyPress(keyCode) {
+    // Create a new keyboard event
+    const event = new KeyboardEvent('keydown', {
+      keyCode: keyCode,
+      bubbles: true,
+      cancelable: true,
+    });
+  
+    // Dispatch the event
+    document.dispatchEvent(event);
   }
 
-  const changeCreatePost = (bool) =>{
-    setCreatePost(bool)
-  }
+  useEffect(()=>{
+    navigator.mediaDevices.getUserMedia({audio: true}).then((stream)=>{
+      const mediaRecorder = new MediaRecorder(stream, {mimeType: 'audio/webm'})
 
-  // useEffect(()=>{
-  //   navigator.mediaDevices.getUserMedia({audio: true}).then((stream)=>{
-  //     const mediaRecorder = new MediaRecorder(stream, {mimeType: 'audio/webm'})
+      const socket = new WebSocket('wss://api.deepgram.com/v1/listen', ['token', process.env.NEXT_PUBLIC_DEEPGRAM_KEY])
 
-  //     const socket = new WebSocket('wss://api.deepgram.com/v1/listen', ['token', process.env.NEXT_PUBLIC_DEEPGRAM_KEY])
-
-  //     socket.onopen = () =>{
-  //       mediaRecorder.addEventListener('dataavailable', event=>{
-  //         socket.send(event.data)
-  //       })
-  //       mediaRecorder.start(250)
-  //     }
+      socket.onopen = () =>{
+        mediaRecorder.addEventListener('dataavailable', event=>{
+          socket.send(event.data)
+        })
+        mediaRecorder.start(250)
+      }
 
 
-  //     socket.onmessage = (message) =>{
-  //       const recieved = JSON.parse(message.data)
-  //       // console.log(recieved)
-  //       const transcript = recieved.channel.alternatives[0].transcript
-  //       if(transcript && recieved.speech_final){
-  //         console.log(transcript)
-  //         const resp = makeQuery(transcript)
-  //         const func = resp.split(':')[0]
-  //         const param = resp.split(':')[1]
-  //         if(){
+      socket.onmessage = async (message) =>{
+        const recieved = JSON.parse(message.data)
+        // console.log(recieved)
+        const transcript = recieved.channel.alternatives[0].transcript
+        if(transcript && recieved.speech_final){
+          console.log(transcript)
+          const resp = await makeQuery(transcript)
+          console.log(resp)
+          const func = resp.split(':')[0]
+          console.log("FUNC", func)
+          const param = resp.split(':')[1]
+          console.log("PARAM", param)
 
-            //  }
-  //       }
-  //     }
-  //   })
-  // },[])
+          switch(func.trim()) {
+            case "changeCreatePost":
+                setCreatePost(param.toLowerCase() == "true")
+                break;
+            case "changeNav":
+                setNav(parseInt(param))
+                break;
+            case "reverb":
+                console.log("Value is 3");
+                break;
+            case "readName":
+              setNav(1)
+              let audioName = document.getElementById("name");
+              if (audioName) {
+                  audioName.play().catch(e => console.error("Error playing the name audio: ", e));
+              }
+              break;
+            case "readBio":
+              setNav(1)
+              let audioBio = document.getElementById("bio");
+              if (audioBio) {
+                  audioBio.play().catch(e => console.error("Error playing the bio audio: ", e));
+              }
+              break;
+            case "echo":
+              setNav(0)
+              simulateKeyPress(32)
+              break;
+            default:
+                break;
+        }
+        }
+      }
+    })
+  },[])
 
   return (
     <div className="w-[100vw] h-[100vh] overflow-hidden">

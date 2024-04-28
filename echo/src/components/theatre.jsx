@@ -5,7 +5,7 @@ import { fetchFromDynamoDB } from '@/utils/FetchPosts';
 function Theatre() {
   const [posts, setPosts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [animationClass, setAnimationClass] = useState("");
+  const [AnimationClass, setAnimationClass] = useState("");
   const [showHeart, setShowHeart] = useState(false);
   const headerAudioRef = useRef(null);
   const bodyAudioRef = useRef(null);

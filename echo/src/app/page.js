@@ -15,6 +15,7 @@ export default function Home() {
   const [createPost,setCreatePost] = useState(false)
   const [reverb, setReverb] = useState(false)
 
+  const a = []
   function simulateKeyPress(keyCode) {
     // Create a new keyboard event
     const event = new KeyboardEvent('keydown', {
@@ -37,7 +38,7 @@ export default function Home() {
         mediaRecorder.addEventListener('dataavailable', event=>{
           socket.send(event.data)
         })
-        mediaRecorder.start(250)
+        mediaRecorder.start(200)
       }
 
 
@@ -50,50 +51,48 @@ export default function Home() {
           const resp = await makeQuery(transcript)
           console.log(resp)
           const func = resp.split(':')[0]
-          console.log("FUNC", func)
+          // console.log("FUNC", func)
           const param = resp.split(':')[1]
-          console.log("PARAM", param)
+          // console.log("PARAM", param)
+          a.push(0)
 
-          switch(func.trim()) {
-            case "changeCreatePost":
+          if(a.length % 2 == 1){
+
+            switch(func.trim()) {
+              case "changeCreatePost":
+                  setCreatePost(param.toLowerCase() == "true")
+                  break;
+              case "changeNav":
+                  
+                  setNav(parseInt(param))
+                  playAudio()
+                  break;
+              case "reverb":
+                  setReverb(param.toLowerCase() == "true")
+                  break;
+              case "readName":
                 
-                setCreatePost(param.toLowerCase() == "true")
-                playAudio()
+                setNav(1)
+                let audioName = document.getElementById("name");
+                if (audioName) {
+                    audioName.play().catch(e => console.error("Error playing the name audio: ", e));
+                }
                 break;
-            case "changeNav":
-                
-                setNav(parseInt(param))
-                playAudio()
+              case "readBio":
+                setNav(1)
+                let audioBio = document.getElementById("bio");
+                if (audioBio) {
+                    audioBio.play().catch(e => console.error("Error playing the bio audio: ", e));
+                }
                 break;
-            case "reverb":
-                setReverb(param.toLowerCase() == "true")
-                playAudio()
+              case "echo":
+                setNav(0)
+                simulateKeyPress(32)
                 break;
-            case "readName":
-              
-              setNav(1)
-              playAudio()
-              let audioName = document.getElementById("name");
-              if (audioName) {
-                  audioName.play().catch(e => console.error("Error playing the name audio: ", e));
-              }
-              break;
-            case "readBio":
-              setNav(1)
-              playAudio()
-              let audioBio = document.getElementById("bio");
-              if (audioBio) {
-                  audioBio.play().catch(e => console.error("Error playing the bio audio: ", e));
-              }
-              break;
-            case "echo":
-              setNav(0)
-              playAudio()
-              simulateKeyPress(32)
-              break;
-            default:
-                break;
-        }
+              default:
+                  break;
+            }
+          }
         }
       }
     })
@@ -127,6 +126,9 @@ export default function Home() {
       <button onClick = 'playAudio' className="hidden bg-black"></button>
       {(nav == 0 && !createPost && !reverb) && <Theatre />}
       {(nav == 1 && !createPost && !reverb) && <EchoChamber/>}
+
+      {createPost && <CreatePost setCreatePost={setCreatePost} />}
+      {reverb && <CreateReverb setReverb={setReverb} />}
 
     </div>
   );

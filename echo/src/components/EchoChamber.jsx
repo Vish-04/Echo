@@ -50,10 +50,10 @@ function EchoChamber() {
           {users.length > 0 && (
             <div className="relative max-w-lg p-4 flex flex-col items-center bg-white text-black rounded-lg shadow-md ">
               <h1 className="text-xl font-semibold">NAME: {users[currentIndex].name}</h1>
-              <p className="text-md">BIO: {users[currentIndex].bio}</p>
-              <audio id = 'bio' src = {users[currentIndex].bio}></audio>
+              <p className="text-md">BIO: {"https://echo-hd-audio.s3.amazonaws.com/body_cbeb0a5b-6fad-473c-b12e-a6f5887fb972.mp3"}</p>
+              <audio id = 'bio' src = {"https://echo-hd-audio.s3.amazonaws.com/body_cbeb0a5b-6fad-473c-b12e-a6f5887fb972.mp3"}></audio>
               <button onClick={playBio} className="hidden">4</button>
-              <audio id = 'name' src = {users[currentIndex].name}></audio>
+              <audio id = 'name' src = {"https://echo-hd-audio.s3.amazonaws.com/headline_cbeb0a5b-6fad-473c-b12e-a6f5887fb972.mp3"}></audio>
               <button onClick={playName} className="hidden"></button>
               <audio src = {users[currentIndex].followers ? users[currentIndex].followers.length : 0}></audio>
               <p className="text-md">Followers: {users[currentIndex].followers ? users[currentIndex].followers.length : 0}</p>

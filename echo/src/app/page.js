@@ -65,7 +65,7 @@ export default function Home() {
         >
           Echo Chamber
         </button>
-        <button onClick={() => setCreatePost(!createPost)}> 1
+        <button onClick={() => setCreatePost(true)}> 1
         </button>
       </nav>
       {nav == 0 && !createPost && <Theatre />}

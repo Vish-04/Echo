@@ -45,7 +45,9 @@ const CreatePost = ({setCreatePost}) => {
         }
         const audio = new Audio('/audio/created.mp3');
         audio.play();
-        setCreatePost(false)
+        setTimeout(()=>{
+            setCreatePost(false)
+        }, 1000)
     }
 
     let chunks = []

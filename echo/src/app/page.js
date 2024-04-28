@@ -54,16 +54,24 @@ export default function Home() {
 
           switch(func.trim()) {
             case "changeCreatePost":
+                
                 setCreatePost(param.toLowerCase() == "true")
+                playAudio()
                 break;
             case "changeNav":
+                
                 setNav(parseInt(param))
+                playAudio()
                 break;
             case "reverb":
+                
                 console.log("Value is 3");
+                playAudio()
                 break;
             case "readName":
+              
               setNav(1)
+              playAudio()
               let audioName = document.getElementById("name");
               if (audioName) {
                   audioName.play().catch(e => console.error("Error playing the name audio: ", e));
@@ -71,6 +79,7 @@ export default function Home() {
               break;
             case "readBio":
               setNav(1)
+              playAudio()
               let audioBio = document.getElementById("bio");
               if (audioBio) {
                   audioBio.play().catch(e => console.error("Error playing the bio audio: ", e));
@@ -78,6 +87,7 @@ export default function Home() {
               break;
             case "echo":
               setNav(0)
+              playAudio()
               simulateKeyPress(32)
               break;
             default:
@@ -86,11 +96,17 @@ export default function Home() {
         }
       }
     })
+    function playAudio(){
+      let audio = document.getElementById('system');
+      if (audio) {
+        audio.play().catch(e => console.error("Error playing the name audio: ", e));
+      }
+    }
   },[])
 
   return (
     <div className="w-[100vw] h-[100vh] overflow-hidden">
-      <nav className="flex justify-center space-x-4 bg-black-800 p-4 text-white">
+      <nav className="flex justify-center space-x-4 bg-black p-4 text-white">
         <button
           className={`p-2 ${nav === 0 ? 'border-b-2 border-black-500' : ''}`}
           onClick={() => setNav(0)}
@@ -103,9 +119,11 @@ export default function Home() {
         >
           Echo Chamber
         </button>
-        <button onClick={() => setCreatePost(true)}> 1
+        <button onClick={() => setCreatePost(true)}>
         </button>
       </nav>
+      <audio id='system' src="audio/system.mp3" className="hidden bg-black"></audio>
+      <button onclick = 'playAudio' className="hidden bg-black"></button>
       {nav == 0 && !createPost && <Theatre />}
       {nav == 1 && !createPost && <EchoChamber/>}
       {createPost && <CreatePost setCreatePost={setCreatePost} />}

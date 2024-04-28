@@ -16,7 +16,22 @@ function EchoChamber({createPost}) {
   
       loadUsers();
     }, []);
-  
+
+    function playBio(){
+        let audio = document.getElementById("bio");
+        if (audio) {
+            audio.play().catch(e => console.error("Error playing the name audio: ", e));
+        }
+    }
+
+
+    function playName(){
+        let audio = document.getElementById("name");
+        if (audio) {
+            audio.play().catch(e => console.error("Error playing the name audio: ", e));
+        }
+    }
+   
     return (
       <div className="h-screen w-screen bg-black flex flex-col items-center justify-center">
           <div className="w-1/4 h-1/4 flex items-center justify-center relative">
@@ -36,8 +51,10 @@ function EchoChamber({createPost}) {
             <div className="relative max-w-lg p-4 flex flex-col items-center bg-white text-black rounded-lg shadow-md ">
               <h1 className="text-xl font-semibold">NAME: {users[currentIndex].name}</h1>
               <p className="text-md">BIO: {users[currentIndex].bio}</p>
-              <audio src = {users[currentIndex].bio}></audio>
-              <audio src = {users[currentIndex].name}></audio>
+              <audio id = 'bio' src = {users[currentIndex].bio}></audio>
+              <button onClick={playBio}>4</button>
+              <audio id = 'name' src = {users[currentIndex].name}></audio>
+              <button onClick={playName}>3</button>
               <audio src = {users[currentIndex].followers ? users[currentIndex].followers.length : 0}></audio>
               <p className="text-md">Followers: {users[currentIndex].followers ? users[currentIndex].followers.length : 0}</p>
              

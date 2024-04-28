@@ -47,7 +47,22 @@ export default function Home() {
 
   return (
     <div className="w-[100vw] h-[100vh] overflow-hidden">
-      <button onClick={e=>setCreatePost(!createPost)}>1</button>
+      <nav className="flex justify-center space-x-4 bg-black-800 p-4 text-white">
+        <button
+          className={`p-2 ${nav === 0 ? 'border-b-2 border-black-500' : ''}`}
+          onClick={() => setNav(0)}
+        >
+          Theatre
+        </button>
+        <button
+          className={`p-2 ${nav === 1 ? 'border-b-2 border-black-500' : ''}`}
+          onClick={() => setNav(1)}
+        >
+          Echo Chamber
+        </button>
+        <button onClick={() => setCreatePost(!createPost)}> 1
+        </button>
+      </nav>
       {nav == 0 && <Theatre />}
       {nav == 1 && <EchoChamber />}
       {createPost && <CreatePost />}

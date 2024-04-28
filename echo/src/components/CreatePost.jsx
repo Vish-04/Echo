@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { uploadPost } from '@/utils/UploadPost';
 
 
-const CreatePost = () => {
+const CreatePost = ({setCreatePost}) => {
     const [canRecord, setCanRecord] = useState(false)
     const [isRecording, setIsRecording] = useState(false)
     const [src, setSrc] = useState("")
@@ -45,6 +45,9 @@ const CreatePost = () => {
         }
         const audio = new Audio('/audio/created.mp3');
         audio.play();
+        setTimeout(()=>{
+            setCreatePost(false)
+        }, 1000)
     }
 
     let chunks = []

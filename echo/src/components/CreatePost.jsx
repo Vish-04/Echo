@@ -36,7 +36,8 @@ const CreatePost = () => {
     const createPost = () =>{
         // const headlineUrl = uploadToS3(srcs[0])
         // const bodyUrl = uploadToS3(srcs[1])
-
+        const audio = new Audio('/audio/created.mp3');
+        audio.play();
         // TODO upload DynamoDB
     }
 

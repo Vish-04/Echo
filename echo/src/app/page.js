@@ -6,12 +6,14 @@ import EchoChamber from "@/components/EchoChamber";
 import { Livvic } from "next/font/google";
 import { useEffect, useState } from "react";
 import { makeQuery } from "@/utils/QueryLLM";
+import CreateReverb from "@/components/CreateComment";
 
 const livvic = Livvic({ subsets: ["latin"], weight:['100', '200', '300', '400', '500', '600', '700', '900'] });
 
 export default function Home() {
   const [nav, setNav] = useState(0)
   const [createPost,setCreatePost] = useState(false)
+  const [reverb, setReverb] = useState(false)
 
   function simulateKeyPress(keyCode) {
     // Create a new keyboard event
@@ -60,7 +62,7 @@ export default function Home() {
                 setNav(parseInt(param))
                 break;
             case "reverb":
-                console.log("Value is 3");
+                setReverb(param.toLowerCase() == "true")
                 break;
             case "readName":
               setNav(1)
@@ -106,9 +108,10 @@ export default function Home() {
         <button onClick={() => setCreatePost(true)}> 1
         </button>
       </nav>
-      {nav == 0 && !createPost && <Theatre />}
-      {nav == 1 && !createPost && <EchoChamber/>}
+      {nav == 0 && !createPost && reverb && <Theatre />}
+      {nav == 1 && !createPost && !reverb && <EchoChamber/>}
       {createPost && <CreatePost setCreatePost={setCreatePost} />}
+      {reverb && <CreateReverb setReverb={setReverb} />}
 
     </div>
   );

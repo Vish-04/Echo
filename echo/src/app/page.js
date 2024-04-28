@@ -63,8 +63,8 @@ export default function Home() {
         <button onClick={() => setCreatePost(!createPost)}> 1
         </button>
       </nav>
-      {nav == 0 && <Theatre />}
-      {nav == 1 && <EchoChamber />}
+      {nav == 0 && <Theatre createPost={createPost} />}
+      {nav == 1 && <EchoChamber createPost={createPost} />}
       {createPost && <CreatePost />}
 
     </div>

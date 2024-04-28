@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { fetchFromDynamoDB } from '@/utils/FetchPosts';
 
-function Theatre() {
+function Theatre({createPost}) {
   const [posts, setPosts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [AnimationClass, setAnimationClass] = useState("");
@@ -28,21 +28,23 @@ function Theatre() {
   }, [currentIndex, posts]); // Ensure header plays every time currentIndex or posts update
 
   const handleKeyDown = (event) => {
-    switch (event.code) {
-      case 'ArrowUp':
-        event.preventDefault();
-        setCurrentIndex(prevIndex => (prevIndex - 1 + posts.length) % posts.length);
-        setAnimationClass('animate-fade-up');
-        break;
-      case 'ArrowDown':
-        event.preventDefault();
-        setCurrentIndex(prevIndex => (prevIndex + 1) % posts.length);
-        setAnimationClass('animate-fade-down');
-        break;
-      case 'Space':
-        event.preventDefault();
-        toggleAudioPlay();
-        break;
+    if(!createPost){
+      switch (event.code) {
+        case 'ArrowUp':
+          event.preventDefault();
+          setCurrentIndex(prevIndex => (prevIndex - 1 + posts.length) % posts.length);
+          setAnimationClass('animate-fade-up');
+          break;
+        case 'ArrowDown':
+          event.preventDefault();
+          setCurrentIndex(prevIndex => (prevIndex + 1) % posts.length);
+          setAnimationClass('animate-fade-down');
+          break;
+        case 'Space':
+          event.preventDefault();
+          toggleAudioPlay();
+          break;
+      }
     }
   };
 

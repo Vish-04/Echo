@@ -1,50 +1,151 @@
 import React, { useEffect, useState } from 'react'
-import Recorder from './Recorder'
 import { uploadToS3 } from '@/utils/UploadAudio'
 
 const CreatePost = () => {
-    const [headlineSrc, setHeadlineSrc] = useState("")
-    const [bodySrc, setBodySrc] = useState("")
-    const [currRec, setCurrRec] = useState(0)
+    const [canRecord, setCanRecord] = useState(false)
+    const [isRecording, setIsRecording] = useState(false)
+    const [src, setSrc] = useState("")
+    const [recorder, setRecorder] = useState(null)
 
-    const initHeadline = () =>{
-        // TODO PLAY Audio Clip, what is post header
-    }
+    const srcs = []
 
     useEffect(()=>{
-        initHeadline
+        const audio = new Audio('/audio/headline.mp3');
+        audio.play();
     }, [])
 
     const handleSrc = (src) =>{
-        if (currRec == 0){
-            setHeadlineSrc(src)
-            setCurrRec(1)
+        console.log("SRC",src)
+        console.log("HEADLINE", srcs[0])
+        console.log("BODY", srcs[1])
+        if (!srcs[0]){
+            srcs.push(src)
             initBody();
-        } else{
-            setBodySrc(src)
-            setCurrRec(2)
+        } else if (!srcs[1]){
+            srcs.push(src)
             createPost()
             // TODO, close the create post.jsx
         }
     }
 
     const initBody = () =>{
-        // TODO PLAY Audio Clip, what is post body
+        const audio = new Audio('/audio/body.mp3');
+        audio.play();
     }
 
-
     const createPost = () =>{
-        const headlineUrl = uploadToS3(headlineSrc)
-        const bodyUrl = uploadToS3(bodySrc)
+        // const headlineUrl = uploadToS3(srcs[0])
+        // const bodyUrl = uploadToS3(srcs[1])
 
         // TODO upload DynamoDB
     }
 
+    let chunks = []
+    let a = []
+
+    const setupStream = (stream) => {
+        console.log("SETUP STREAM")
+        setRecorder(new MediaRecorder(stream))
+        setCanRecord(true)
+    }
+
+    const setupAudio = () => {
+        console.log("setup AUDIO")
+        if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({
+                audio: true
+            }).then(setupStream)
+            .catch(err =>{console.log(err)})
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener("keydown", keyDown);
+        document.addEventListener("keyup", keyUp);
+        return () => {
+          document.removeEventListener("keydown", keyDown);
+          document.removeEventListener("keyup", keyUp );
+        };
+      }, []);
+
+      const keyDown = (event) => {
+          if (event.code === "Space" && (a.length % 2 === 0 )) {
+            document.getElementById('recordButton').click()
+            // toggleMic();
+            a.push(0)
+           
+        }
+      };
+
+      const keyUp = (event) => {
+          if (event.code === "Space" && (a.length % 1 === 0 )) {
+            document.getElementById('recordButton').click()
+            // toggleMic();
+            a.push(1)
+        }
+      };
+
+    useEffect(() => {
+        if (recorder) {
+            recorder.ondataavailable = e => {
+                chunks.push(e.data)
+            }
+            recorder.onstop = e => {
+                const blob = new Blob(chunks, { type: "audio/ogg; codecs=opus"});
+                chunks = []
+                const audioURL = window.URL.createObjectURL(blob)
+                console.log("IN")
+                setSrc(audioURL);
+                handleSrc(audioURL)
+            }
+        }
+    }, [recorder])
+
+    const toggleMic = () => {
+        console.log("toggleMic")
+        setIsRecording(!isRecording)
+
+        if(isRecording){
+            recorder.start();
+        } else{
+            try {
+                recorder.stop() 
+            } catch (error) {
+                
+            }
+        }
+    }
+
+    useEffect(()=>{
+        setupAudio();
+        try {
+            setTimeout(()=>{
+                toggleMic();
+            }, 200)
+            
+        } catch (error) {
+            
+        }
+        try {
+            setTimeout(()=>{
+                toggleMic();
+            }, 200)
+            
+        } catch (error) {
+            
+        }
+    },[])
+
 
     return (
-        <>
-            <Recorder handleSrc={handleSrc} />
-        </>
+        <div
+            className='w-[100vw] h-[100vh] bg-gray-300'
+        >
+            <button className=' hidden' id='recordButton' onClick={toggleMic} disabled={!canRecord}>
+                {isRecording ? "Recording..." : "Click to Record"}
+            </button>
+            {/* <audio controls={true} src={src} /> */}
+        </div>
     )
 }
 

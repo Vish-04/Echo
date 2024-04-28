@@ -2,7 +2,7 @@
 
 import CreatePost from "@/components/CreatePost";
 import Theatre from "@/components/theatre";
-import EchoChamber from "@/components/EchoChamber";
+import EchoChamber from "@/components/EchoChamber"; 
 import { Livvic } from "next/font/google";
 import { useEffect, useState } from "react";
 
@@ -48,7 +48,7 @@ export default function Home() {
   return (
     <>
       <button onClick={e=>setCreatePost(!createPost)}>1</button>
-      {nav == 0 && <EchoChamber />}
+      {nav == 0 && <Theatre />}
       {nav == 1 && <Theatre />}
       {nav == 2 && <Theatre />}
       {nav == 3 && <Theatre />}

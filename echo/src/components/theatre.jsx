@@ -5,7 +5,6 @@ import { Inter, Livvic } from "next/font/google";
 function Theatre() {
   return (
     <div className="h-[100vh] w-[100vw] relative bg-black">
-        <h1 className='font-livvic text-white'>ECHO</h1>
     <div className="absolute inset-0 flex justify-center items-center">
       {/* Adjust w- and h- classes to control the size of the image */}
       <div className="w-1/3 h-1/3 animate-pulse-expand-outwards">

@@ -55,11 +55,5 @@ module.exports = {
       },
     },
   },
-  theme: {
-    extend: {
-      fontFamily: {
-        livvic: ['Livvic'],
-      },
-    },
-  },
+
 };

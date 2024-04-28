@@ -124,9 +124,9 @@ export default function Home() {
         </button>
       </nav>
       <audio id='system' src="audio/system.mp3" className="hidden bg-black"></audio>
-      <button onclick = 'playAudio' className="hidden bg-black"></button>
-      {nav == 0 && !createPost && reverb && <Theatre />}
-      {nav == 1 && !createPost && !reverb && <EchoChamber/>}
+      <button onClick = 'playAudio' className="hidden bg-black"></button>
+      {(nav == 0 && !createPost && !reverb) && <Theatre />}
+      {(nav == 1 && !createPost && !reverb) && <EchoChamber/>}
 
     </div>
   );

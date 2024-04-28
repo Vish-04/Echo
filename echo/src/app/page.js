@@ -46,16 +46,13 @@ export default function Home() {
   },[])
 
   return (
-    <>
+    <div className="w-[100vw] h-[100vh] overflow-hidden">
       <button onClick={e=>setCreatePost(!createPost)}>1</button>
       {nav == 0 && <Theatre />}
-      {nav == 1 && <Theatre />}
-      {nav == 2 && <Theatre />}
-      {nav == 3 && <Theatre />}
-      {nav == 4 && <Theatre />}
+      {nav == 1 && <EchoChamber />}
       {createPost && <CreatePost />}
 
-    </>
+    </div>
   );
 }
 

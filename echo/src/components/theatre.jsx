@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { fetchFromDynamoDB } from '@/utils/FetchPosts';
@@ -6,7 +5,7 @@ import { fetchFromDynamoDB } from '@/utils/FetchPosts';
 function Theatre() {
   const [posts, setPosts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [AnimationClass,setAnimationClass] = useState("");
+  const [animationClass, setAnimationClass] = useState("");
   const [showHeart, setShowHeart] = useState(false);
   const headerAudioRef = useRef(null);
   const bodyAudioRef = useRef(null);
@@ -18,47 +17,57 @@ function Theatre() {
     }
 
     loadData();
+  }, []);
 
-    const handleKeyDown = (event) => {
-      switch (event.code) {
-        case 'ArrowUp':
-          event.preventDefault();
-          setCurrentIndex(prevIndex => (prevIndex - 1 + posts.length) % posts.length);
-          setAnimationClass('animate-fade-up');
-          break;
-        case 'ArrowDown':
-          event.preventDefault();
-          setCurrentIndex(prevIndex => (prevIndex + 1) % posts.length);
-          setAnimationClass('animate-fade-down');
-          break;
-        case 'Space':
-          event.preventDefault();
-          playBodyAudio();
-          break;
-      }
-    };
+  useEffect(() => {
+    if (headerAudioRef.current && posts.length > 0) {
+      headerAudioRef.current.src = posts[currentIndex]?.header || '';
+      headerAudioRef.current.load();
+      playAudio(headerAudioRef.current);
+    }
+  }, [currentIndex, posts]); // Ensure header plays every time currentIndex or posts update
 
+  const handleKeyDown = (event) => {
+    switch (event.code) {
+      case 'ArrowUp':
+        event.preventDefault();
+        setCurrentIndex(prevIndex => (prevIndex - 1 + posts.length) % posts.length);
+        setAnimationClass('animate-fade-up');
+        break;
+      case 'ArrowDown':
+        event.preventDefault();
+        setCurrentIndex(prevIndex => (prevIndex + 1) % posts.length);
+        setAnimationClass('animate-fade-down');
+        break;
+      case 'Space':
+        event.preventDefault();
+        toggleAudioPlay();
+        break;
+    }
+  };
+
+  useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [currentIndex, posts.length]);
 
-  useEffect(() => {
-    if (headerAudioRef.current) {
-      headerAudioRef.current.src = posts[currentIndex]?.header;
-      headerAudioRef.current.load();
-      headerAudioRef.current.play().catch(error => {
-        console.error('Error playing header audio:', error);
+  function playAudio(audioElement) {
+    if (audioElement) {
+      audioElement.play().catch(error => {
+        console.error('Error playing audio:', error);
+        // Handle auto-play policy by catching errors here
       });
     }
-  }, [currentIndex, posts]);
+  }
 
-  function playBodyAudio() {
+  function toggleAudioPlay() {
+    if (headerAudioRef.current && !headerAudioRef.current.paused) {
+      headerAudioRef.current.pause();
+    }
     if (bodyAudioRef.current) {
       bodyAudioRef.current.src = posts[currentIndex]?.body;
       bodyAudioRef.current.load();
-      bodyAudioRef.current.play().catch(error => {
-        console.error('Error playing body audio:', error);
-      });
+      playAudio(bodyAudioRef.current);
     }
   }
 
@@ -68,7 +77,8 @@ function Theatre() {
         <Image
           src="/imgs/LOGO - Text.png"
           alt="Echo Logo"
-          className='animate-fade-in-out' // Apply the custom fade animation
+          layout='responsive'
+          objectFit='contain'
           width={200}
           height={200}
         />
@@ -109,7 +119,3 @@ function PlayCircleIcon(props) {
 }
 
 export default Theatre;
-
-
-
-

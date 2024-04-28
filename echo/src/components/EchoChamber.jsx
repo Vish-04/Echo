@@ -18,9 +18,10 @@ function EchoChamber() {
     }, []);
   
     return (
-      <div className="h-full w-screen bg-black flex flex-col items-center justify-center">
-          <div className="flex items-center justify-center relative">
+      <div className="h-screen w-screen bg-black flex flex-col items-center justify-center">
+          <div className="w-1/4 h-1/4 flex items-center justify-center relative">
             <Image
+              className='animate-fade-in-out'
               src="/imgs/LOGO - Text.png"
               alt="Echo Logo"
               layout="responsive"
@@ -32,11 +33,16 @@ function EchoChamber() {
 
           {/* User Information Display */}
           {users.length > 0 && (
-            <div className="bg-white p-6 rounded-lg shadow-md text-black">
-              <h1 className="text-xl font-semibold">{users[currentIndex].name}</h1>
-              <p className="text-md">{users[currentIndex].bio}</p>
-              {/* Display the number of followers */}
+            <div className="relative max-w-lg p-4 flex flex-col items-center bg-white text-black rounded-lg shadow-md ">
+              <h1 className="text-xl font-semibold">NAME: {users[currentIndex].name}</h1>
+              <p className="text-md">BIO: {users[currentIndex].bio}</p>
+              <audio src = {users[currentIndex].bio}></audio>
+              <audio src = {users[currentIndex].name}></audio>
+              <audio src = {users[currentIndex].followers ? users[currentIndex].followers.length : 0}></audio>
               <p className="text-md">Followers: {users[currentIndex].followers ? users[currentIndex].followers.length : 0}</p>
+             
+              {/* Display the number of followers */}
+              
             </div>
           )}
       </div>

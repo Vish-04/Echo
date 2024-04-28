@@ -75,6 +75,7 @@ function Theatre() {
     <div className="h-screen w-screen bg-black flex flex-col items-center justify-center">
       <div className="w-1/4 h-1/4 flex items-center justify-center relative">
         <Image
+          className='animate-fade-in-out'
           src="/imgs/LOGO - Text.png"
           alt="Echo Logo"
           layout='responsive'

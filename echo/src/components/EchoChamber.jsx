@@ -18,8 +18,8 @@ function EchoChamber() {
     }, []);
   
     return (
-      <div className="h-full w-screen bg-black flex flex-col items-center justify-center gap-10">
-          <div className="w-1/4 h-1/4 flex items-center justify-center relative mb-5">
+      <div className="h-full w-screen bg-black flex flex-col items-center justify-center">
+          <div className="flex items-center justify-center relative">
             <Image
               src="/imgs/LOGO - Text.png"
               alt="Echo Logo"

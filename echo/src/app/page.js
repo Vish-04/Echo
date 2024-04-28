@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 const livvic = Livvic({ subsets: ["latin"], weight:['100', '200', '300', '400', '500', '600', '700', '900'] });
 
 export default function Home() {
-  const [nav, setNav] = useState(1)
+  const [nav, setNav] = useState(0)
   const [createPost,setCreatePost] = useState(false)
 
   const changeNav = (num) =>{

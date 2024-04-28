@@ -50,18 +50,18 @@ module.exports = {
         pulseExpandOutwards: {
           '0%, 100%': { 
             transform: 'scale(1)', 
-            opacity: '1' 
+            opacity: '1'
           },
-          '50%': { 
+          '50%': {
             transform: 'scale(1.1)', // Increase scale more than 1 to expand outwards
-            opacity: '.5' 
+            opacity: '.5'
           },
         },
       },
       animation: {
         'fade-in-out': 'pulseExpandOutwards 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'fade-up': 'fadeUp 0.5s ease-out forwards infinite',
-        'fade-down': 'fadeDown 0.5s ease-in backwards infinite'
+        'fade-up': 'fadeUp 0.5s ease-out forwards',
+        'fade-down': 'fadeDown 0.5s ease-in backwards'
       },
     },
   },

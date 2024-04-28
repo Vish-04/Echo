@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { fetchFromDynamoDB } from '@/utils/FetchPosts';
 
-function Theatre({createPost}) {
+function Theatre() {
   const [posts, setPosts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [AnimationClass, setAnimationClass] = useState("");
@@ -28,7 +28,6 @@ function Theatre({createPost}) {
   }, [currentIndex, posts]); // Ensure header plays every time currentIndex or posts update
 
   const handleKeyDown = (event) => {
-    if(!createPost){
       switch (event.code) {
         case 'ArrowUp':
           event.preventDefault();
@@ -45,7 +44,6 @@ function Theatre({createPost}) {
           toggleAudioPlay();
           break;
       }
-    }
   };
 
   useEffect(() => {

@@ -20,6 +20,11 @@ export default function Home() {
     setCreatePost(bool)
   }
 
+  useEffect(()=>{ 
+    console.log("CREA", createPost)
+
+  },[createPost])
+
   useEffect(()=>{
     navigator.mediaDevices.getUserMedia({audio: true}).then((stream)=>{
       const mediaRecorder = new MediaRecorder(stream, {mimeType: 'audio/webm'})
@@ -63,9 +68,9 @@ export default function Home() {
         <button onClick={() => setCreatePost(!createPost)}> 1
         </button>
       </nav>
-      {nav == 0 && <Theatre createPost={createPost} />}
-      {nav == 1 && <EchoChamber createPost={createPost} />}
-      {createPost && <CreatePost />}
+      {nav == 0 && !createPost && <Theatre />}
+      {nav == 1 && !createPost && <EchoChamber/>}
+      {createPost && <CreatePost setCreatePost={setCreatePost} />}
 
     </div>
   );

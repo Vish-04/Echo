@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { fetchFromDynamoDB } from '@/utils/FetchPosts'; // Adjust the import path as necessary
 
-function EchoChamber({createPost}) {
+function EchoChamber() {
     const [users, setUsers] = useState([]); // State to store users from DynamoDB
     const [currentIndex, setCurrentIndex] = useState(0); // State to keep track of the current user index
   

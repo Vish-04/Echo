@@ -1,4 +1,4 @@
-export const uploadToS3 = async (src) => {
+export const uploadToS3 = async (src, file_name) => {
     if (!src) return;
 
     const s3 = new AWS.S3({
@@ -10,14 +10,21 @@ export const uploadToS3 = async (src) => {
     const audioBlob = await fetch(src).then(res => res.blob());
     const params = {
         Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET,
-        Key: 'audioRecording.ogg',
-        Body: audioBlob
+        Key: `${file_name}.ogg`,
+        Body: audioBlob,
+        ACL: 'public-read'
     };
 
     try {
-        await s3.upload(params).promise();
+        const data = await s3.upload(params).promise();
         console.log("Audio uploaded to S3 successfully!");
+
+        const publicUrl = data.Location;
+        console.log("Public URL:", publicUrl);
+        
+        return publicUrl;
     } catch (error) {
         console.error("Error uploading audio to S3:", error);
+        return null;
     }
 };

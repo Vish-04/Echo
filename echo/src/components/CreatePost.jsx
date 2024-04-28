@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { uploadToS3 } from '@/utils/UploadAudio'
+import { v4 as uuidv4 } from 'uuid';
+import { uploadPost } from '@/utils/UploadPost';
+
 
 const CreatePost = () => {
     const [canRecord, setCanRecord] = useState(false)
@@ -34,8 +37,12 @@ const CreatePost = () => {
     }
 
     const createPost = () =>{
-        // const headlineUrl = uploadToS3(srcs[0])
-        // const bodyUrl = uploadToS3(srcs[1])
+        const uuid = uuidv4();
+        const userId = "6562f5bf-8f92-4a7b-8371-3012ca104df7"
+        const headlineUrl = uploadToS3(srcs[0], `headline_${uuid}`)
+        const bodyUrl = uploadToS3(srcs[1], `body_${uuid}`)
+
+        uploadPost(uuid, userId, headlineUrl, bodyUrl)
         const audio = new Audio('/audio/created.mp3');
         audio.play();
         // TODO upload DynamoDB

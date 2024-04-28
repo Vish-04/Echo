@@ -73,7 +73,7 @@ function Theatre() {
 
   return (
     <div className="h-screen w-screen bg-black flex flex-col items-center justify-center">
-      <div className="w-1/4 h-1/4 relative animate-fade-in-out">
+      <div className="w-1/4 h-1/4 flex items-center justify-center relative">
         <Image
           src="/imgs/LOGO - Text.png"
           alt="Echo Logo"
@@ -85,9 +85,10 @@ function Theatre() {
       </div>
 
       {posts.length > 0 && (
-        <div className={`relative w-3/4 max-w-lg p-4 bg-white text-black rounded-lg shadow-md ${animationClass}`}>
-          <h1 className="text-xl font-bold">{posts[currentIndex].header}</h1>
-          <p className="text-lg">{posts[currentIndex].body}</p>
+        <div className= {`relative w-3/4 max-w-lg p-4 flex flex-col items-center bg-white text-black rounded-lg shadow-md ${AnimationClass}`}  >
+          <h1 className="text-2xl font-bold">POST</h1>
+          <PlayCircleIcon />
+          <p className="text-sm text-center">{posts[currentIndex].body}</p>
           {showHeart && <Image src="/imgs/heart-icon.png" alt="Heart" width={30} height={30} className="absolute right-5 top-5" />}
           <audio ref={headerAudioRef} hidden />
           <audio ref={bodyAudioRef} hidden />
@@ -95,6 +96,26 @@ function Theatre() {
       )}
     </div>
   );
+}
+
+function PlayCircleIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="2.5rem"
+      height="2.5rem"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <polygon points="10 8 16 12 10 16 10 8" />
+    </svg>
+  )
 }
 
 export default Theatre;

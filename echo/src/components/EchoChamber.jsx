@@ -18,10 +18,8 @@ function EchoChamber() {
     }, []);
   
     return (
-      <div className="h-[100vh] w-[100vw] flex justify-center items-center bg-black">
-        <div className="space-y-8">
-          {/* Image Container */}
-          <div className="relative w-100 h-100 animate-pulse-expand-outwards">
+      <div className="h-full w-screen bg-black flex flex-col items-center justify-center">
+          <div className="flex items-center justify-center relative">
             <Image
               src="/imgs/LOGO - Text.png"
               alt="Echo Logo"
@@ -41,7 +39,6 @@ function EchoChamber() {
               <p className="text-md">Followers: {users[currentIndex].followers ? users[currentIndex].followers.length : 0}</p>
             </div>
           )}
-        </div>
       </div>
     );
 }

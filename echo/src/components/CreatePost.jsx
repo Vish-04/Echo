@@ -18,16 +18,12 @@ const CreatePost = () => {
     }, [])
 
     const handleSrc = (src) =>{
-        console.log("SRC",src)
-        console.log("HEADLINE", srcs[0])
-        console.log("BODY", srcs[1])
         if (!srcs[0]){
             srcs.push(src)
             initBody();
         } else if (!srcs[1]){
             srcs.push(src)
             createPost()
-            // TODO, close the create post.jsx
         }
     }
 
@@ -36,29 +32,30 @@ const CreatePost = () => {
         audio.play();
     }
 
-    const createPost = () =>{
+    const createPost = async () =>{
         const uuid = uuidv4();
         const userId = "6562f5bf-8f92-4a7b-8371-3012ca104df7"
-        const headlineUrl = uploadToS3(srcs[0], `headline_${uuid}`)
-        const bodyUrl = uploadToS3(srcs[1], `body_${uuid}`)
+        const headlineUrl = await uploadToS3(srcs[0], `headline_${uuid}`)
+        const bodyUrl = await uploadToS3(srcs[1], `body_${uuid}`)
 
-        uploadPost(uuid, userId, headlineUrl, bodyUrl)
+        try{
+            await uploadPost(uuid, userId, headlineUrl, bodyUrl)
+        } catch (e){
+
+        }
         const audio = new Audio('/audio/created.mp3');
         audio.play();
-        // TODO upload DynamoDB
     }
 
     let chunks = []
     let a = []
 
     const setupStream = (stream) => {
-        console.log("SETUP STREAM")
         setRecorder(new MediaRecorder(stream))
         setCanRecord(true)
     }
 
     const setupAudio = () => {
-        console.log("setup AUDIO")
         if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             navigator.mediaDevices.getUserMedia({
                 audio: true
@@ -99,7 +96,7 @@ const CreatePost = () => {
                 chunks.push(e.data)
             }
             recorder.onstop = e => {
-                const blob = new Blob(chunks, { type: "audio/ogg; codecs=opus"});
+                const blob = new Blob(chunks, { type: "audio/mpeg"});
                 chunks = []
                 const audioURL = window.URL.createObjectURL(blob)
                 console.log("IN")
@@ -110,7 +107,6 @@ const CreatePost = () => {
     }, [recorder])
 
     const toggleMic = () => {
-        console.log("toggleMic")
         setIsRecording(!isRecording)
 
         if(isRecording){
@@ -146,13 +142,10 @@ const CreatePost = () => {
 
 
     return (
-        <div
-            className='w-[100vw] h-[100vh] bg-gray-300'
-        >
+        <div>
             <button className=' hidden' id='recordButton' onClick={toggleMic} disabled={!canRecord}>
-                {isRecording ? "Recording..." : "Click to Record"}
+                btn
             </button>
-            {/* <audio controls={true} src={src} /> */}
         </div>
     )
 }

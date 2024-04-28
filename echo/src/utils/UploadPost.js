@@ -1,13 +1,16 @@
 import { DynamoDB } from 'aws-sdk';
 
 const dynamodb = new DynamoDB({
-    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY,
+    credentials:{
+        accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY,
+    },
     region: process.env.NEXT_PUBLIC_AWS_REGION
 });
 
 export const uploadPost = async (postId, userId, headlineUrl, bodyUrl) => {
 
+    console.log(postId, userId, headlineUrl, bodyUrl, "HELP")
     const params = {
         TableName: 'post',
         Item: {

@@ -2,6 +2,7 @@
 
 import CreatePost from "@/components/CreatePost";
 import Theatre from "@/components/theatre";
+import EchoChamber from "@/components/EchoChamber";
 import { Livvic } from "next/font/google";
 import { useState } from "react";
 
@@ -10,6 +11,7 @@ const livvic = Livvic({ subsets: ["latin"], weight:['100', '200', '300', '400', 
 export default function Home() {
   const [nav, setNav] = useState(0)
   const [createPost,setCreatePost] = useState(false)
+
   const changeNav = (num) =>{
     setNav(num)
   }
@@ -21,7 +23,7 @@ export default function Home() {
   return (
     <>
       <button onClick={e=>setCreatePost(!createPost)}>1</button>
-      {nav == 0 && <Theatre />}
+      {nav == 0 && <EchoChamber />}
       {nav == 1 && <Theatre />}
       {nav == 2 && <Theatre />}
       {nav == 3 && <Theatre />}
@@ -31,5 +33,4 @@ export default function Home() {
     </>
   );
 }
-
 

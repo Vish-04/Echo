@@ -1,44 +1,84 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { fetchFromDynamoDB } from '@/utils/FetchPosts';
 
 function Theatre() {
-  const posts = ["Post 1", "Post 2", "Post 3", "Post 4"]; // Array of posts
-  const [currentIndex, setCurrentIndex] = useState(0); // State to keep track of the current post index
+  const [posts, setPosts] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [showHeart, setShowHeart] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false); // Track if audio is playing
+  const headerAudioRef = useRef(null);
+  const bodyAudioRef = useRef(null);
 
   useEffect(() => {
-    function handleKeyDown(event) {
-      if (event.code === 'Space') {
-        // Prevent the default action to stop the page from scrolling
-        event.preventDefault();
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % posts.length); // Cycle through the posts
-      }
+    async function loadData() {
+      const items = await fetchFromDynamoDB("post");
+      // Assuming you're fetching usernames linked to each post
+      setPosts(items.map(item => ({ ...item, username: 'Username fetched based on item.userId' })));
     }
 
-    // Add event listener for keydown
-    window.addEventListener('keydown', handleKeyDown);
+    loadData();
+  }, []);
 
-    // Clean up the event listener when the component unmounts
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      switch (event.code) {
+        case 'ArrowUp':
+          event.preventDefault();
+          setCurrentIndex(prevIndex => (prevIndex - 1 + posts.length) % posts.length);
+          break;
+        case 'ArrowDown':
+          event.preventDefault();
+          setCurrentIndex(prevIndex => (prevIndex + 1) % posts.length);
+          break;
+        case 'Space':
+          event.preventDefault();
+          toggleAudioPlay();
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [posts.length]); // Depend on posts.length to ensure it updates if the number of posts changes
+  }, [currentIndex, posts.length]);
+
+  function toggleAudioPlay() {
+    if (bodyAudioRef.current) {
+      if (isPlaying) {
+        bodyAudioRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        bodyAudioRef.current.play().then(() => {
+          setIsPlaying(true);
+        }).catch(error => {
+          console.error('Error playing body audio:', error);
+          setIsPlaying(false);
+        });
+      }
+    }
+  }
 
   return (
-    <div className="h-[100vh] w-[100vw] relative bg-black">
-      <div className="relative inset-0 flex flex-col justify-center items-center space-y-10">
-        {/* Image Container */}
-        <div className="w-1/4 h-1/4 animate-pulse-expand-outwards">
-          <Image
-            src="/imgs/LOGO - Text.png" // Correct your path if necessary
-            alt="Echo Logo"
-            layout="responsive"
-            objectFit="contain"
-            width={100} // Dummy value, adjust as needed
-            height={100} // Dummy value, adjust as needed
-          />
-        </div>
-
-        {/* Post Display */}
-        <h1 className="text-white text-center font-livvic">{posts[currentIndex]}</h1>
+    <div className="h-screen w-screen bg-black flex flex-col items-center justify-center">
+      <div className="w-1/4 h-1/4 relative animate-fade-in-out">
+        <Image
+          src="/imgs/LOGO - Text.png"
+          alt="Echo Logo"
+          layout='responsive'
+          objectFit='contain'
+          width={200}
+          height={200}
+        />
       </div>
+
+      {posts.length > 0 && (
+        <div className={`relative w-3/4 max-w-lg p-4 bg-white text-black rounded-lg shadow-md ${isPlaying ? 'animate-bounce' : ''}`}>
+          <h1 className="text-xl font-bold">{posts[currentIndex].username || "Unknown User"}</h1>
+          <p className="text-lg">{posts[currentIndex].body}</p>
+          {showHeart && <Image src="/imgs/heart-icon.png" alt="Heart" width={30} height={30} className="absolute right-5 top-5" />}
+          <audio ref={bodyAudioRef} src={posts[currentIndex].body} hidden />
+        </div>
+      )}
     </div>
   );
 }
